@@ -31,9 +31,14 @@ const upload = multer({ storage });
 
 app.get('/', (req, res) => {
   db.query('SELECT * FROM anggota', (err, result) => {
-    res.render('index', { anggota: result });
+    if (err) {
+      console.error(err);
+      return res.render('index', { anggota: [] });
+    }
+    res.render('index', { anggota: result || [] });
   });
 });
+
 
 app.get('/tambah', (req, res) => {
   res.render('tambah');
