@@ -8,8 +8,8 @@ const multer = require('multer');
 const app = express();
 
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'kelompokuser',
+    host: '192.168.1.11',
+    user: 'elpyand',
     password: 'passwordku',
     database: 'kelompokdb'
 });
@@ -41,7 +41,7 @@ app.get('/tambah', (req, res) => {
 
 app.post('/tambah', upload.single('foto'), (req, res) => {
   const { nama } = req.body;
-  const foto = req.file ? '/uploads/' + req.file.filename : null;
+  const foto = req.file ? req.file.filename : null;
   db.query('INSERT INTO anggota (nama, foto) VALUES (?, ?)', [nama, foto], () => {
     res.redirect('/');
   });
@@ -58,7 +58,7 @@ app.post('/edit/:id', upload.single('foto'), (req, res) => {
   const id = req.params.id;
   const { nama } = req.body;
   if (req.file) {
-    const foto = '/uploads/' + req.file.filename;
+    const foto = req.file ? req.file.filename : null;
     db.query('UPDATE anggota SET nama = ?, foto = ? WHERE id = ?', [nama, foto, id], () => {
       res.redirect('/');
     });
