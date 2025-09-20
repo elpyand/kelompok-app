@@ -1,0 +1,13 @@
+<h1>Edit Anggota</h1>
+<form action="/edit/<%= anggota.id %>" method="POST" enctype="multipart/form-data">
+  <p>Nama: <input type="text" name="nama" value="<%= anggota.nama %>" required></p>
+  <p>Foto lama: 
+    <% if (anggota.foto) { %>
+      <img src="/uploads/<%= anggota.foto %>" width="80">
+    <% } %>
+  </p>
+  <p>Foto baru: <input type="file" name="foto"></p>
+  <button type="submit">Update</button>
+</form>
+<a href="/">Kembali</a>
+

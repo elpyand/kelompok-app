@@ -1,0 +1,30 @@
+<h1>Daftar Anggota</h1>
+<a href="/tambah">+ Tambah Anggota</a>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Foto</th>
+    <th>Nama</th>
+    <th>Aksi</th>
+  </tr>
+  <% if (anggota.length > 0) { %>
+    <% anggota.forEach(a => { %>
+      <tr>
+        <td>
+          <% if (a.foto) { %>
+            <img src="/uploads/<%= a.foto %>" width="80">
+          <% } %>
+        </td>
+        <td><%= a.nama %></td>
+        <td>
+          <a href="/edit/<%= a.id %>">Edit</a> |
+          <a href="/delete/<%= a.id %>">Hapus</a>
+        </td>
+      </tr>
+    <% }) %>
+  <% } else { %>
+    <tr>
+      <td colspan="3">Belum ada data anggota.</td>
+    </tr>
+  <% } %>
+</table>
+
