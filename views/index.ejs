@@ -6,7 +6,7 @@
     </div>
   </div>
 
-    <% if (anggota && anggota.length > 0) { %>
+  <% if (anggota.length > 0) { %>
     <div class="cards">
       <% anggota.forEach(a => { %>
         <div class="card">
@@ -35,11 +35,12 @@
             <a class="action-btn delete" href="/delete/<%= a.id %>">Hapus</a>
           </div>
         </div>
-    <% }) %>
-  </div>
-<% } else { %>
-  <div class="empty">Belum ada data anggota.</div>
-<% } %>
+      <% }) %>
+    </div>
+    
+  <% } else { %>
+    <div class="empty">Belum ada data anggota.</div>
+  <% } %>
 </div>
 
 <!-- Modal Tambah -->

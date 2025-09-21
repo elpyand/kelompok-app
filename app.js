@@ -8,9 +8,9 @@ const multer = require('multer');
 const app = express();
 
 const db = mysql.createConnection({
-    host: '192.168.1.11',
+    host: '192.168.1.9',
     user: 'elpyand',
-    password: 'passwordku',
+    password: '12345',
     database: 'kelompokdb'
 });
 db.connect();
@@ -32,8 +32,8 @@ const upload = multer({ storage });
 app.get('/', (req, res) => {
   db.query('SELECT * FROM anggota', (err, result) => {
     if (err) {
-      console.error(err);
-      return res.render('index', { anggota: [] });
+      console.error("DB Error:", err);
+      return res.render('index', { anggota: [] }); // pastikan anggota selalu ada
     }
     res.render('index', { anggota: result || [] });
   });
