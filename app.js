@@ -46,11 +46,16 @@ app.get('/tambah', (req, res) => {
 
 app.post('/tambah', upload.single('foto'), (req, res) => {
   const { nama } = req.body;
-  const foto = req.file ? req.file.filename : null;
-  db.query('INSERT INTO anggota (nama, foto) VALUES (?, ?)', [nama, foto], () => {
+  const foto = req.file ? req.file.filename : 'default.png'; // biar nggak null
+  db.query('INSERT INTO anggota (nama, foto) VALUES (?, ?)', [nama, foto], (err) => {
+    if (err) {
+      console.error("Insert Error:", err);
+      return res.redirect('/tambah');
+    }
     res.redirect('/');
   });
 });
+
 
 app.get('/edit/:id', (req, res) => {
   const id = req.params.id;
